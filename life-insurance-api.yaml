@@ -1,0 +1,207 @@
+openapi: 3.0.0
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/YANGSHAWN14/Life-Insurance-Quoter/1.0.0
+  - description: Local Mock Server
+    url: http://localhost:4010
+
+info:
+  description: Simple Life Insurance Quoter API
+  version: "1.0.0"
+  title: Life Insurance Quoter API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+tags:
+  - name: developers
+    description: Operations available to regular developers
+
+paths:
+
+  /quotes:
+    post:
+      summary: Generate life insurance quotes
+      description: Accepts quote request information and returns available insurance quotes
+      operationId: generateQuotes
+      tags:
+        - developers
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteRequest'
+
+      responses:
+        '200':
+          description: Successful quote generation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+              example:
+                quoteId: "quote_9f3a7c21"
+                generatedAt: "2026-03-19T12:30:45Z"
+                coverageAmount: 250000
+                productType: "term"
+                termLength: 20
+                quotes:
+                  - carrier:
+                      carrierId: "MOH"
+                      carrierName: "Mutual of Omaha"
+                      carrierLogo: "https://example.com/logos/mutual-of-omaha.png"
+                    monthlyPremium: 28.15
+                  - carrier:
+                      carrierId: "PRU"
+                      carrierName: "Prudential"
+                      carrierLogo: "https://example.com/logos/prudential.png"
+                    monthlyPremium: 31.42
+                  - carrier:
+                      carrierId: "NLG"
+                      carrierName: "National Life Group"
+                      carrierLogo: "https://example.com/logos/national-life.png"
+                    monthlyPremium: 33.87
+
+  /carriers:
+    get:
+      summary: Get available insurance carriers
+      description: Returns a list of insurance carriers available for quoting
+      operationId: getCarriers
+      tags:
+        - developers
+
+      responses:
+        '200':
+          description: A list of insurance carriers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Carrier'
+              example:
+                - carrierId: "MOH"
+                  carrierName: "Mutual of Omaha"
+                  carrierLogo: "https://example.com/logos/mutual-of-omaha.png"
+                - carrierId: "PRU"
+                  carrierName: "Prudential"
+                  carrierLogo: "https://example.com/logos/prudential.png"
+                - carrierId: "NLG"
+                  carrierName: "National Life Group"
+                  carrierLogo: "https://example.com/logos/national-life.png"
+
+components:
+  schemas:
+
+    QuoteRequest:
+      type: object
+      required:
+        - state
+        - birthdate
+        - gender
+        - tobaccoUse
+        - healthClass
+        - productType
+        - coverageAmount
+      properties:
+        state:
+          type: string
+          enum: [AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA]
+
+        birthdate:
+          type: string
+          format: date
+          example: "1990-01-01"
+
+        gender:
+          type: string
+          enum: [male, female, non-binary]
+
+        tobaccoUse:
+          type: boolean
+          description: Whether the applicant uses tobacco
+
+        healthClass:
+          type: string
+          enum: [standard, standard_plus, preferred, preferred_plus]
+
+        productType:
+          type: string
+          enum: [term, whole_life, universal_life]
+
+        coverageAmount:
+          type: integer
+          minimum: 10000
+          example: 250000
+
+    QuoteResponse:
+      type: object
+      required:
+        - quoteId
+        - generatedAt
+        - coverageAmount
+        - termLength
+        - productType
+        - quotes
+      properties:
+        quoteId:
+          type: string
+          description: Unique identifier for the generated quote
+
+        generatedAt:
+          type: string
+          format: date-time
+
+        coverageAmount:
+          type: integer
+
+        termLength:
+          type: integer
+          example: 20
+
+        productType:
+          type: string
+
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteOption'
+
+    QuoteOption:
+      type: object
+      required:
+        - carrier
+        - monthlyPremium
+      properties:
+        carrier:
+          $ref: '#/components/schemas/Carrier'
+
+        monthlyPremium:
+          type: number
+          format: float
+          example: 28.15
+
+    Carrier:
+      type: object
+      required:
+        - carrierId
+        - carrierName
+        - carrierLogo
+      properties:
+        carrierId:
+          type: string
+          example: "MOH"
+
+        carrierName:
+          type: string
+
+        carrierLogo:
+          type: string
+          format: uri
+          example: "https://example.com/logos/mutual-of-omaha.png"
