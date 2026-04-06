@@ -1,0 +1,17 @@
+[
+    {
+        "carrierId": "MOH",
+        "carrierName": "Mutual of Omaha",
+        "carrierLogo": "https://example.com/logos/mutual-of-omaha.png"
+    },
+    {
+        "carrierId": "PRU",
+        "carrierName": "Prudential",
+        "carrierLogo": "https://example.com/logos/prudential.png"
+    },
+    {
+    "carrierId": "NAC",
+    "carrierName": "North American Company for Life and Health Insurance",
+    "carrierLogo": "https://example.com/logos/north-american-company.png"
+    }  
+]
