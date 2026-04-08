@@ -1,6 +1,6 @@
 // import express
 const express = require('express');
-// const quoteRoutes = require('./routes/quotes');
+const quoteRoutes = require('./routes/quotes');
 const carrierRoutes = require('./routes/carriers');
 
 // Create server
@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.send('Hello world!')
 })
 
-// app.use('/quotes', quoteRoutes);
+app.use('/quotes', quoteRoutes);
 app.use('/carriers', carrierRoutes);
 
 const PORT = 4010;
