@@ -1,0 +1,10 @@
+* /quotes *
+{
+    "state": "CA", 
+    "birthdate": "1990-1-1", 
+    "gender": Male, 
+    "tobaccoUse": false, 
+    "healthClass": "preferred", 
+    "productType": "whole_life", 
+    "coverageAmount": 500000
+}
