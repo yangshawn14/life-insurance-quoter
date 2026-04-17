@@ -1,7 +1,18 @@
-* /quotes *
+* /quotes * 
+// This should not have any errors
 {
     "state": "CA", 
     "birthdate": "1990-1-1", 
+    "gender": Male, 
+    "tobaccoUse": false, 
+    "healthClass": "preferred", 
+    "productType": "whole_life", 
+    "coverageAmount": 500000
+}
+
+// This should FAIL due to birthdate missing 
+{
+    "state": "CA", 
     "gender": Male, 
     "tobaccoUse": false, 
     "healthClass": "preferred", 

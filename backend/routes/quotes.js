@@ -1,5 +1,7 @@
-// import express
+// Import express
 const express = require('express');
+// Import validateQuote.js
+const validateQuote = require('../middleware/validateQuote');
 // create router
 const router = express.Router();
 // Will need access to carriers data
@@ -7,15 +9,16 @@ const carriers = require('../data/carriers.json');
 
 // routes
 // POST quote details
-router.post('/', (req, res) => {
+router.post('/', validateQuote, (req, res) => {
     // Get user input from req body
     // console.log(req.body);
     const quoteRequest = req.body;
 
+    // This 'age' variable not needed at this level of complexity 
     // Get age from quoteRequest.birthdate
-    const birthdate = new Date(quoteRequest.birthdate);
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthdate.getFullYear();
+    // const birthdate = new Date(quoteRequest.birthdate);
+    // const currentDate = new Date();
+    // const age = currentDate.getFullYear() - birthdate.getFullYear();
 
 
     // Generate a quote from each carrier
