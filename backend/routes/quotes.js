@@ -10,9 +10,10 @@ const carriers = require('../data/carriers.json');
 // routes
 // POST quote details
 router.post('/', validateQuote, (req, res) => {
+    console.log('Router Handler Running...')
     // Get user input from req body
     // console.log(req.body);
-    const quoteRequest = req.body;
+    // const quoteRequest = req.body;
 
     // This 'age' variable not needed at this level of complexity 
     // Get age from quoteRequest.birthdate

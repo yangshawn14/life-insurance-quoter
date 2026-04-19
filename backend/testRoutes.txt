@@ -3,7 +3,7 @@
 {
     "state": "CA", 
     "birthdate": "1990-1-1", 
-    "gender": Male, 
+    "gender": "Male", 
     "tobaccoUse": false, 
     "healthClass": "preferred", 
     "productType": "whole_life", 
@@ -13,9 +13,20 @@
 // This should FAIL due to birthdate missing 
 {
     "state": "CA", 
-    "gender": Male, 
+    "gender": "Male", 
     "tobaccoUse": false, 
     "healthClass": "preferred", 
     "productType": "whole_life", 
     "coverageAmount": 500000
+}
+
+// This should Fail due to invalid coverageAmount
+{
+    "state": "CA", 
+    "birthdate": "1990-1-1", 
+    "gender": "Male", 
+    "tobaccoUse": false, 
+    "healthClass": "preferred", 
+    "productType": "whole_life", 
+    "coverageAmount": 0
 }
