@@ -2,12 +2,15 @@
 const express = require('express');
 const quoteRoutes = require('./routes/quotes');
 const carrierRoutes = require('./routes/carriers');
+const cors = require('cors');
 
 // Create server
 const app = express();
 
+
 // Middleware
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 
 // routes
 // Test route
