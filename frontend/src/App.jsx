@@ -5,6 +5,8 @@ function App() {
   const [coverageAmount, setCoverageAmount] = useState("");
   const [quotes, setQuotes] = useState([]);
   // Add loading and error states
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     // test
@@ -13,19 +15,38 @@ function App() {
 
     e.preventDefault();
 
-    const response = await fetch('http://localhost:4010/quotes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        birthdate,
-        coverageAmount
-      })
-    });
+    setLoading(true);
+    setError(null);
 
-    const data = await response.json();
-    setQuotes(data.quotes);
+    try {
+      const response = await fetch('http://localhost:4010/quotes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          birthdate,
+          coverageAmount
+        })
+      });
+
+      // Manually handle failed HTTP responses
+      if (!response.ok) {
+        throw new Error("Failed to fetch quotes");
+      }
+
+      const data = await response.json();
+
+      setQuotes(data.quotes);
+
+    } catch (err) {
+      console.log(err);
+      setError("Could not show quotes. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+
+
   };
 
   return (
@@ -46,6 +67,9 @@ function App() {
         <button type="submit" >Get Quotes</button>
 
       </form>
+
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
 
       {quotes.map((quote) => (
         <div key={quote.carrierId}>
