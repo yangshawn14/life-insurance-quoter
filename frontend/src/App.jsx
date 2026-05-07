@@ -51,32 +51,51 @@ function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="date"
-          value={birthdate}
-          onChange={(e) => setBirthDate(e.target.value)}
-        />
+      <div className="flex flex-col min-h-screen p-6 gap-6">
+        <div className="mx-auto border p-4 rounded-xl">
+          <h1 className="text-2xl text-white bg-blue-500 px-3 py-4 rounded-lg">Instant Life Insurance Quoter</h1>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-10">
+            <input
+              type="date"
+              value={birthdate}
+              onChange={(e) => setBirthDate(e.target.value)}
+              className="w-full max-w-md bg-white shadow-md rounded-xl px-3 py-4 border"
+            />
 
-        <input
-          type="number"
-          value={coverageAmount}
-          onChange={(e) => setCoverageAmount(e.target.value)}
-        />
+            <input
+              type="number"
+              value={coverageAmount}
+              onChange={(e) => setCoverageAmount(e.target.value)}
+              className="w-full max-w-md bg-white shadow-md rounded-xl px-3 py-4 border"
+              placeholder="50000"
+            />
 
-        <button type="submit" >Get Quotes</button>
+            <button
+              type="submit"
+              className="max-w-md text-white text-xl bg-blue-500 shadow-md rounded-xl py-4">
+              Get Quotes
+            </button>
 
-      </form>
-
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-
-      {quotes.map((quote) => (
-        <div key={quote.carrierId}>
-          <h3>{quote.carrierName}</h3>
-          <p>${quote.monthlyPremium}</p>
+          </form>
         </div>
-      ))}
+
+
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+
+        <div className="w-150 mx-auto flex flex-col gap-2">
+          <h2>Quotes:</h2>
+          {quotes.map((quote) => (
+            <div key={quote.carrierId} className="max-w-md flex flex-col border rounded-xl p-2">
+              <h3>{quote.carrierName}</h3>
+              <p>Monthly Premium: ${quote.monthlyPremium}</p>
+            </div>
+          ))}
+        </div>
+
+
+      </div>
+
 
     </>
   )
