@@ -1,4 +1,5 @@
 import { useState } from "react";
+import QuoteList from "../components/OuoteList";
 
 function App() {
   const [birthdate, setBirthDate] = useState("");
@@ -83,16 +84,8 @@ function App() {
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
 
-        <div className="w-150 mx-auto flex flex-col gap-2">
-          <h2>Quotes:</h2>
-          {quotes.map((quote) => (
-            <div key={quote.carrierId} className="max-w-md flex flex-col border rounded-xl p-2">
-              <h3>{quote.carrierName}</h3>
-              <p>Monthly Premium: ${quote.monthlyPremium}</p>
-            </div>
-          ))}
-        </div>
-
+        {/* QuoteList Component */}
+        <QuoteList quotes={quotes} />
 
       </div>
 
