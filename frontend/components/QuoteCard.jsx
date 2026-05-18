@@ -1,9 +1,9 @@
 function QuoteCard({ quote }) {
     return (
         <>
-            <div key={quote.carrierId} className="max-w-md flex flex-col border rounded-xl p-2">
+            <div key={quote.carrierId} className="max-w-md flex justify-between items-center border rounded-xl p-2">
                 <h3>{quote.carrierName}</h3>
-                <p>Monthly Premium: ${quote.monthlyPremium}</p>
+                <p className="p-px">Premium: ${quote.monthlyPremium}/mo</p>
             </div>
         </>
     );

@@ -73,19 +73,25 @@ function App() {
 
             <button
               type="submit"
-              className="max-w-md text-white text-xl bg-blue-500 shadow-md rounded-xl py-4">
-              Get Quotes
+              // className="max-w-md text-white text-xl bg-blue-500 shadow-md rounded-xl py-4"
+              className={`max-w-md text-white text-xl bg-blue-500 shadow-md rounded-xl py-4 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+              disabled={loading}
+            >
+              {/* Get Quotes */}
+              {loading ? <p>Loading</p> : <p>Get Quotes</p>}
             </button>
 
           </form>
         </div>
 
-
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {/* {loading && <p>Loading...</p>} */}
+        {error && <p className="mx-auto">{error}</p>}
 
         {/* QuoteList Component */}
-        <QuoteList quotes={quotes} />
+        {quotes.length > 0 && (
+          <QuoteList quotes={quotes} />
+        )}
+
 
       </div>
 
